@@ -11,7 +11,7 @@ namespace BlockLogin
     {
         public override Version Version
         {
-            get { return new Version("1.0"); }
+            get { return new Version("1.0.1"); }
         }
         public override string Name
         {
@@ -53,7 +53,12 @@ namespace BlockLogin
             {
                 string encrPass = TShock.Utils.HashPassword(array[1]);
                 var user = TShock.Users.GetUserByName(player.Name);
-                if (user.Password.ToUpper() == encrPass.ToUpper()) {
+                if (user == null)
+                {
+                    return;
+                }
+                if (user.Password.ToUpper() == encrPass.ToUpper())
+                {
                     player.SendMessage("Woah there! You almost said your password in chat. Use /login with the slash.", Color.Red);
                     args.Handled = true;
                     return;
