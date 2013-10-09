@@ -31,33 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HttpServer">
-      <HintPath>..\..\TShock\TShockAPI\bin\Release\HttpServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Data.Sqlite">
-      <HintPath>..\..\TShock\TShockAPI\bin\Release\Mono.Data.Sqlite.dll</HintPath>
-    </Reference>
-    <Reference Include="MySql.Data">
-      <HintPath>..\..\TShock\TShockAPI\bin\Release\MySql.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="MySql.Web">
-      <HintPath>..\..\TShock\TShockAPI\bin\Release\MySql.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\TShock\TShockAPI\bin\Release\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="TerrariaServer">
-      <HintPath>..\..\TShock\TerrariaServerBins\TerrariaServer.exe</HintPath>
+      <HintPath>..\..\..\..\Desktop\Reference TShock\TerrariaServer.exe</HintPath>
     </Reference>
     <Reference Include="TShockAPI">
-      <HintPath>..\..\TShock\TShockAPI\bin\Release\TShockAPI.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Reference TShock\ServerPlugins\TShockAPI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 using Terraria;
+using TerrariaApi.Server;
 using TShockAPI;
 
 namespace BlockLogin
 {
-    [APIVersion(1, 12)]
+    [ApiVersion(1, 14)]
     public class BlockLogin : TerrariaPlugin
     {
         public override Version Version
         {
-            get { return new Version("1.0.1"); }
+            get { return new Version("1.1"); }
         }
         public override string Name
         {
@@ -29,27 +31,28 @@ namespace BlockLogin
         public BlockLogin(Main game)
             : base(game)
         {
-            Order = -10;
+            Order = 500;
         }
         public override void Initialize()
         {
-            Hooks.ServerHooks.Chat += OnChat;
+            ServerApi.Hooks.ServerChat.Register(this, OnChat);
         }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                Hooks.ServerHooks.Chat -= OnChat;
+                ServerApi.Hooks.ServerChat.Deregister(this, OnChat);
             }
             base.Dispose(disposing);
         }
-        private void OnChat(messageBuffer msg, int ply, string text, HandledEventArgs args)
+        private void OnChat(ServerChatEventArgs args)
         {
-            string[] array = text.Split(' ');
+            string[] array = args.Text.Split(' ');
             if (args.Handled) { return; }
             if (array[0][0] == '/') { return; }
-            TSPlayer player = TShock.Players[ply];
-            if (array[0].Contains("login") && (array.Length == 2))
+            TSPlayer player = TShock.Players[args.Who];
+            Match match = Regex.Match(array[0], ".*l.*o.*g.*i.*n.*", RegexOptions.IgnoreCase);
+            if (match.Success && (array.Length == 2))
             {
                 string encrPass = TShock.Utils.HashPassword(array[1]);
                 var user = TShock.Users.GetUserByName(player.Name);
@@ -59,7 +62,7 @@ namespace BlockLogin
                 }
                 if (user.Password.ToUpper() == encrPass.ToUpper())
                 {
-                    player.SendMessage("Woah there! You almost said your password in chat. Use /login with the slash.", Color.Red);
+                    player.SendErrorMessage("Woah there! You almost said your password in chat. Use /login with the slash.");
                     args.Handled = true;
                     return;
                }
