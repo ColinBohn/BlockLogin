@@ -8,7 +8,7 @@ using TShockAPI;
 
 namespace BlockLogin
 {
-    [ApiVersion(1, 14)]
+    [ApiVersion(1, 16)]
     public class BlockLogin : TerrariaPlugin
     {
         public override Version Version
