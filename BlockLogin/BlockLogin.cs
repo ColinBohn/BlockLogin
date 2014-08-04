@@ -50,7 +50,7 @@ namespace BlockLogin
             if (args.Handled) { return; }
             string[] array = args.Text.Split(' ');
             if (String.IsNullOrWhiteSpace(array[0])) { return; }
-            if (array[0][0] == '/') { return; }
+            if (array[0][0].Equals(TShock.Config.CommandSpecifier)) { return; }
             TSPlayer player = TShock.Players[args.Who];
             Match match = Regex.Match(array[0], ".*l.*o.*g.*i.*n.*", RegexOptions.IgnoreCase);
             if (match.Success && (array.Length == 2))
@@ -63,7 +63,7 @@ namespace BlockLogin
                 }
                 if (user.Password.ToUpper() == encrPass.ToUpper())
                 {
-                    player.SendErrorMessage("Woah there! You almost said your password in chat. Use /login with the slash.");
+                    player.SendErrorMessage("Woah there! You almost said your password in chat. Use " + TShock.Config.CommandSpecifier + "login with the " + TShock.Config.CommandSpecifier);
                     args.Handled = true;
                     return;
                }
