@@ -8,7 +8,7 @@ using TShockAPI;
 
 namespace BlockLogin
 {
-    [ApiVersion(1, 16)]
+    [ApiVersion(1, 19)]
     public class BlockLogin : TerrariaPlugin
     {
         public override Version Version
@@ -50,18 +50,19 @@ namespace BlockLogin
             if (args.Handled) { return; }
             string[] array = args.Text.Split(' ');
             if (String.IsNullOrWhiteSpace(array[0])) { return; }
-            if (array[0][0].Equals(TShock.Config.CommandSpecifier)) { return; }
+            TShock.Log.ConsoleInfo("array: " + array[0][0]);
+            if (array[0][0].ToString().Equals(TShock.Config.CommandSpecifier) || array[0][0].ToString().Equals(TShock.Config.CommandSilentSpecifier)) { return; }
             TSPlayer player = TShock.Players[args.Who];
             Match match = Regex.Match(array[0], ".*l.*o.*g.*i.*n.*", RegexOptions.IgnoreCase);
             if (match.Success && (array.Length == 2))
             {
-                string encrPass = TShock.Utils.HashPassword(array[1]);
+                string pass = array[1];
                 var user = TShock.Users.GetUserByName(player.Name);
                 if (user == null)
                 {
                     return;
                 }
-                if (user.Password.ToUpper() == encrPass.ToUpper())
+                if (user.VerifyPassword(pass))
                 {
                     player.SendErrorMessage("Woah there! You almost said your password in chat. Use " + TShock.Config.CommandSpecifier + "login with the " + TShock.Config.CommandSpecifier);
                     args.Handled = true;
