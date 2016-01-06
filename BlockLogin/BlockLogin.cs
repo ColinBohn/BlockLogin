@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Text.RegularExpressions;
 using Terraria;
 using TerrariaApi.Server;
@@ -8,7 +6,7 @@ using TShockAPI;
 
 namespace BlockLogin
 {
-    [ApiVersion(1, 22)]
+	[ApiVersion(1, 22)]
     public class BlockLogin : TerrariaPlugin
     {
         public override Version Version
