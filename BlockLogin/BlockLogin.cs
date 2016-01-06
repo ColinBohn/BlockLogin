@@ -50,7 +50,6 @@ namespace BlockLogin
             if (args.Handled) { return; }
             string[] array = args.Text.Split(' ');
             if (String.IsNullOrWhiteSpace(array[0])) { return; }
-            TShock.Log.ConsoleInfo("array: " + array[0][0]);
             if (array[0][0].ToString().Equals(TShock.Config.CommandSpecifier) || array[0][0].ToString().Equals(TShock.Config.CommandSilentSpecifier)) { return; }
             TSPlayer player = TShock.Players[args.Who];
             Match match = Regex.Match(array[0], ".*l.*o.*g.*i.*n.*", RegexOptions.IgnoreCase);
